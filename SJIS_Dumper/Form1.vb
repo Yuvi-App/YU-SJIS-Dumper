@@ -55,4 +55,35 @@ Public Class Form1
             MessageBox.Show("Please check only button")
         End If
     End Sub
+
+    Private Sub FormatTXTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormatTXTToolStripMenuItem.Click
+        If OpenFileDialog2.ShowDialog = DialogResult.OK Then
+            Dim filepath = OpenFileDialog2.FileName
+            Dim filename = System.IO.Path.GetFileName(OpenFileDialog2.FileName)
+
+            Try
+                Dim Position As String
+                Dim Text As String
+                Dim writefile As System.IO.StreamWriter
+                writefile = My.Computer.FileSystem.OpenTextFileWriter(filename & ".csv", True)
+                Dim Lines() As String = IO.File.ReadAllLines(filepath, System.Text.Encoding.GetEncoding(932))
+                For Each l In Lines
+                    If l.ToString.Contains("Position :") Then
+                        Dim splitl = l.ToString.Split(":")
+                        Position = splitl(1).Trim
+                    ElseIf l = "" Then
+                        writefile.WriteLine(Position & "," & Text)
+                        Position = ""
+                        Text = ""
+                    Else
+                        Text = l.Trim
+                    End If
+                Next
+                writefile.Close()
+                MessageBox.Show("CSV Generated")
+            Catch ex As Exception
+                MessageBox.Show("ERROR: Couldnt convert to CSV")
+            End Try
+        End If
+    End Sub
 End Class
