@@ -8,3 +8,5 @@ Updated & wrapped EsperKnight's SJIS-Dump code around a GUI that will allow bulk
 
 This was used with success in my Cross Hermit Update & Translation Project.
 Ill continue to update it as needed :D 
+
+![alt text](https://s3.yuvi.app/GamePreservation/CrossHermit/github-files/sjisdumper.jpg "")
